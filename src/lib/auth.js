@@ -7,7 +7,7 @@ export function setToken(res, token) {
   const cookie = serialize(COOKIE_NAME, token, {
     maxAge: MAX_AGE,
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: process.env.NODE_ENV === "development",
     path: "/",
     sameSite: "lax",
   });

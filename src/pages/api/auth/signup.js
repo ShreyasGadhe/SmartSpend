@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import bcrypt from "bcrypt";
 import { setToken } from "@/lib/auth";
 
 export default async function handler(req, res) {
@@ -6,13 +7,15 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  const { email, password, name } = req.body;
+  let { email, password, name } = req.body;
 
   try {
     const existingUser = await prisma.user.findUnique({ where: { email } });
 
     if (existingUser)
       return res.status(405).json({ message: "User already exists." });
+
+    password = await bcrypt.hash(password, 10);
 
     const user = await prisma.user.create({
       data: {
