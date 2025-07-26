@@ -1,7 +1,7 @@
 import React from "react";
 
 function page() {
-  return <div>page</div>;
+  return <div className="px-4">page</div>;
 }
 
 export default page;
