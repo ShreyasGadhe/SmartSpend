@@ -67,4 +67,3 @@ model YearHistory{
   @@id([ month, year, userId])
 }
 
-//prisma client has not been instantiated yet
